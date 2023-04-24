@@ -24,11 +24,31 @@ print('-------------')
 #print(tqg.single_constraint(query, target))
 
 
-query = f"select id from movie where id<5000000;"
-target = 8000
+#query = f"select id from movie where id<5000000;"
+#target = 8000
+
+#_min, _max = tqg.get_bounds('id', 'from movie');
+#print(_max)
+#print(_min)
 
 
-print(tqg.single_constraint(query, target))
+
+
+#print(tqg.single_constraint(query, target))
+
+
+#query = f"select a.id, a.name FROM actor a, casting c, movie m, actor a2, casting c2 WHERE a.id=c.actor_id AND m.id=c.movie_id AND a2.id = c2.actor_id AND c.ord=1 AND m.votes <= 100000 AND c2.movie_id<100000 AND a.id != a2.id;"
+target = 32000
+
+with open("queries/q6.sql") as f:
+    #a = f.readlines()
+    query = f.read().replace('\n', ' ')
+
+
+
+
+qu, e = tqg.single_constraint_for_complicated(query, target)
+print(e)
 
 
 tqg.close()
